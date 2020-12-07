@@ -22,6 +22,13 @@ prev.addEventListener('click', () => {
 })
 
 function updateDOM() {
+  setActive()
+  const actives = document.querySelectorAll('.active')
+  progress.style.width = ((actives.length - 1) / (circles.length - 1) * 100 + '%')
+  checkActive()
+}
+
+function setActive() {
   circles.forEach((circle, index) => {
     if (index < currentActive) {
       circle.classList.add('active')
@@ -29,4 +36,15 @@ function updateDOM() {
       circle.classList.remove('active')
     }
   })
+}
+
+function checkActive() {
+  if (currentActive === 1) {
+    prev.disabled = true
+  } else if (currentActive === circles.length) {
+    next.disabled = true
+  } else {
+    prev.disabled = false
+    next.disabled = false
+  }
 }
